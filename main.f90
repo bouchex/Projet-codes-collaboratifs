@@ -3,6 +3,7 @@ Program Main
   Use Data
   Use functions
   Use Evolution_Energie
+  Use Histogramme
 
   implicit none
 
