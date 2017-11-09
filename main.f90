@@ -7,18 +7,27 @@ Program Main
   implicit none
 
   Integer, parameter :: N = 10
-  Real, dimension(N) :: Energies, Vecteur
+  Integer :: Niter, i
+  Real, dimension(N) :: Energies, Vect_sigma
   Real :: random
 
   Call ReadData()
+  Open(1,file='Temperature.dat')
 
   Energies = NRJ_Aleatoires(N)
+  Vect_sigma = Vect_Aleatoire(N)
+  Niter = ceiling(tau/dt)
   !write(6,*) Energies
+  Do i = 1, Niter
+    Energies = Evol(Energies,Vect_sigma)
+    T = Temperature(Energies, R)
+    write(1,*) T
+  End Do
 
-  T = Temperature(Energies, R)
-  write(6,*) "Temperature : ", T
 
-  Vecteur = Vect_Aleatoire(N)
+  Close(1)
+
+
   !write(6,*) Vecteur
 
 End Program Main
