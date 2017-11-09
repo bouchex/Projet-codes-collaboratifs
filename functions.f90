@@ -39,5 +39,18 @@ contains
 
   End function
 
+  function Temperature(Vect_NRJ,R)
+    Implicit None
+    Integer :: i
+    Real, dimension(:), intent(IN) :: Vect_NRJ
+    Real :: Temperature, R
+
+    Temperature = 0.
+
+    Do i = 1,size(Vect_NRJ)
+      Temperature = Temperature + Vect_NRJ(i)
+    End Do
+    Temperature = Temperature/(size(Vect_NRJ)*R)
+  End function
 
 End module

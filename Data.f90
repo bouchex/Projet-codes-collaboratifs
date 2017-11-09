@@ -3,7 +3,7 @@ Module Data
   implicit none
 
   Real :: R, T, tau, F0, dt
- 
+
 CONTAINS
 
   Subroutine ReadData()
@@ -11,7 +11,7 @@ CONTAINS
     Character (len = 32) :: file_name
 
     ! Ouverture fichier data.txt
-    open (unit=11,file=Data.txt,action="read",status="old")
+    open (unit=11,file="Data.txt",action="read",status="old")
 
       Read (unit=11,fmt=*) R
       Read (unit=11,fmt=*) T
