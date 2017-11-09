@@ -47,10 +47,9 @@ contains
 
     Temperature = 0.
 
-    Do i = 1,size(Vect_NRJ)
-      Temperature = Temperature + Vect_NRJ(i)
-    End Do
-    Temperature = Temperature/(size(Vect_NRJ)*R)
+    Temperature = sum(Vect_NRJ)/(size(Vect_NRJ)*R)
+    write(6,*) "somme : ", sum(Vect_NRJ)
+
   End function
 
 End module
