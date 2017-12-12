@@ -7,14 +7,14 @@ Program Main
 
   implicit none
 
-  Integer, parameter :: N = 1000
+  Integer, parameter :: N = 10000
   Integer :: Niter, i
   Real, dimension(N) :: Energies
   Real :: verif_sortie
 
   Call ReadData()
   Open(1,file='Temperature.dat')
-  Open(2,file='Energies.dat')
+  ! Open(2,file='Energies.dat')
 
 
   Energies = NRJ_Aleatoires(N)
@@ -28,13 +28,15 @@ Program Main
   End Do
   T = Temperature(Energies, R)
   write(1,*) T
-  Do i = 1, size(Energies)
-    write(2,*) Energies(i)
-  End Do
-  verif_sortie = sortie(Energies,100,0.,200000.)
+  ! Do i = 1, size(Energies)
+  !   write(2,*) Energies(i)
+  ! End Do
+  !write(6,*) "Boucle terminée"
+  verif_sortie = sortie(Energies,100,1000000.)
+  !write(6,*) "Histogramme écrit"
 
   Close(1)
-  Close(2)
+  ! Close(2)
 
 
   !write(6,*) Vecteur

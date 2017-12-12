@@ -11,10 +11,12 @@ contains
     Real, dimension(N) :: NRJ_Aleatoires
     Integer :: i
     Real, parameter :: y = 200000., x = 100000.
+    Real :: temp
 
+    temp = (y-x)+x
     Do i = 1, N
       NRJ_Aleatoires(i) = 0.
-      NRJ_Aleatoires(i) = rand()*(y-x)+x
+      NRJ_Aleatoires(i) = rand()*temp
     End Do
 
     !write(6,*) NRJ_Aleatoires
@@ -25,20 +27,19 @@ contains
     Integer, intent(IN) :: N
     Real, dimension(N) :: Vect_Aleatoire
     Integer :: i
-    Real :: s, m, u, v, Variance, Moyenne
+    Real :: s, m, u, v, temp1, temp2
 
     s = 1.
     m = 0.
-    Variance = 0.
-    Moyenne = 0.
 
-    Do i = 1, N
-      Vect_Aleatoire(i) = 0.
+    Do i = 1, N-1, 2
+      !Vect_Aleatoire(i) = 0.
       u = rand()
       v = rand()
-      Vect_Aleatoire(i) = m + s * Sqrt(-2 * Log(1-u)) * Cos(2 * pi * v)
-      Moyenne = Moyenne + Vect_Aleatoire(i)
-      Variance = Variance + Vect_Aleatoire(i)**2
+      temp1 = Sqrt(-2 * Log(1-u))
+      temp2 = 2 * pi * v
+      Vect_Aleatoire(i) = m + s * temp1 * Cos(temp2)
+      Vect_Aleatoire(i+1) = m + s * temp1 * Sin(temp2)
     End Do
 
     !write(6,*) "Moyenne : ", Moyenne/N ," Variance : ", Variance/N
