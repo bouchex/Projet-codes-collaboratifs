@@ -19,16 +19,30 @@ Real Function sortie(Tab, taille_histo, inf, sup)
     do i=1,taille_histo
        Histogramme(i) = 0
        Bornes_histo(i) = inf + (i-1) * ecart
-       write(6,*) Bornes_histo(i)
+       !write(6,*) Bornes_histo(i)
     end do
 
+    ! do i=1, size(Tab)
+    !    if (Tab(i) > Bornes_histo(taille_histo)) then
+    !       Histogramme(taille_histo) = Histogramme(taille_histo) + 1
+    !    else
+    !       do j=2, taille_histo
+    !          if (Tab(i) < Bornes_histo(j)) then
+    !             Histogramme(j-1) = Histogramme(j-1) + 1
+    !             exit
+    !         end if
+    !       end do
+    !    end if
+    ! end do
     do i=1, size(Tab)
-       if (Tab(i) > Bornes_histo(taille_histo)) then
+      if (Tab(i) < inf) then
+        Histogramme(1) = Histogramme(1) + 1
+      elseif (Tab(i) > sup) then
           Histogramme(taille_histo) = Histogramme(taille_histo) + 1
-       else
-          do j=2, taille_histo
+      else
+          do j=2, taille_histo-1
              if (Tab(i) < Bornes_histo(j)) then
-                Histogramme(j-1) = Histogramme(j-1) + 1
+                Histogramme(j) = Histogramme(j) + 1
                 exit
             end if
           end do
