@@ -25,17 +25,23 @@ contains
     Integer, intent(IN) :: N
     Real, dimension(N) :: Vect_Aleatoire
     Integer :: i
-    Real :: s, m, u, v
+    Real :: s, m, u, v, Variance, Moyenne
 
     s = 1.
     m = 0.
+    Variance = 0.
+    Moyenne = 0.
 
     Do i = 1, N
       Vect_Aleatoire(i) = 0.
       u = rand()
       v = rand()
       Vect_Aleatoire(i) = m + s * Sqrt(-2 * Log(1-u)) * Cos(2 * pi * v)
+      Moyenne = Moyenne + Vect_Aleatoire(i)
+      Variance = Variance + Vect_Aleatoire(i)**2
     End Do
+
+    !write(6,*) "Moyenne : ", Moyenne/N ," Variance : ", Variance/N
 
   End function
 
@@ -46,9 +52,10 @@ contains
     Real :: Temperature, R
 
     Temperature = 0.
-
+    !write(6,*) "somme (moyenne) : ", sum(Vect_NRJ)/size(Vect_NRJ)
     Temperature = sum(Vect_NRJ)/(size(Vect_NRJ)*R)
-    write(6,*) "somme : ", sum(Vect_NRJ)
+    !write(6,*) "somme (temperature) : ", Temperature
+
 
   End function
 

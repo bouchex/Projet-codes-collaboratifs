@@ -19,6 +19,7 @@ Real Function sortie(Tab, taille_histo, inf, sup)
     do i=1,taille_histo
        Histogramme(i) = 0
        Bornes_histo(i) = inf + (i-1) * ecart
+       write(6,*) Bornes_histo(i)
     end do
 
     do i=1, size(Tab)

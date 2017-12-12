@@ -7,28 +7,34 @@ Program Main
 
   implicit none
 
-  Integer, parameter :: N = 10
+  Integer, parameter :: N = 1000
   Integer :: Niter, i
-  Real, dimension(N) :: Energies, Vect_sigma
+  Real, dimension(N) :: Energies
   Real :: verif_sortie
 
   Call ReadData()
   Open(1,file='Temperature.dat')
+  Open(2,file='Energies.dat')
 
 
   Energies = NRJ_Aleatoires(N)
-  Vect_sigma = Vect_Aleatoire(N)
   Niter = ceiling(tau/dt)
-  write(6,*) Energies
+  !write(6,*) Energies
   Do i = 1, Niter
+    !write(6,*) "******* Itération : ", i
     T = Temperature(Energies, R)
-    Energies = Evol(Energies,Vect_sigma)
+    Energies = Evol(Energies)
     write(1,*) T
   End Do
   T = Temperature(Energies, R)
-  verif_sortie = sortie(Energies,10,100000.,200000.)
+  write(1,*) T
+  Do i = 1, size(Energies)
+    write(2,*) Energies(i)
+  End Do
+  verif_sortie = sortie(Energies,100,0.,200000.)
 
   Close(1)
+  Close(2)
 
 
   !write(6,*) Vecteur
